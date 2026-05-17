@@ -7,7 +7,9 @@ import type { FlowAnswers } from "../flow/types";
 import shared from "./shared.module.css";
 
 const HEALTH_AND_GO_LOGO =
-  "https://www.figma.com/api/mcp/asset/c8aa0327-eb04-49e2-b29c-a9893517cb08";
+  "https://www.figma.com/api/mcp/asset/4d4506bf-7218-49ba-a359-7d5084888ff0";
+const BACK_ARROW_SRC =
+  "https://www.figma.com/api/mcp/asset/de57665d-1c5b-49d2-b79c-97b808aa2e55";
 
 export function QuestionPage() {
   const { questionId } = useParams<{ questionId: string }>();
@@ -57,25 +59,18 @@ export function QuestionPage() {
 
   return (
     <div className={shared.questionPage}>
-      {showBackButton && (
-        <button type="button" className={shared.pageBackButton} onClick={goBack} aria-label="Go back">
-          <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">
-            <path
-              d="M23 9L13 19L23 29"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      )}
+      <div className={shared.questionIntro}>
+        {showBackButton && (
+          <button type="button" className={shared.pageBackButton} onClick={goBack} aria-label="Go back">
+            <img className={shared.pageBackIcon} src={BACK_ARROW_SRC} alt="" aria-hidden="true" />
+          </button>
+        )}
 
-      <div className={shared.operatedBy}>
-        <span>Operated by</span>
-        <div className={shared.healthLogoFrame}>
-          <img src={HEALTH_AND_GO_LOGO} alt="Health&go" />
+        <div className={shared.operatedBy}>
+          <span>Operated by</span>
+          <div className={shared.healthLogoFrame}>
+            <img src={HEALTH_AND_GO_LOGO} alt="Health&go" />
+          </div>
         </div>
       </div>
 

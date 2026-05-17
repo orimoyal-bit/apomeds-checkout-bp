@@ -6,27 +6,41 @@
   padding-top: 14px;
 }
 
+.questionIntro {
+  position: relative;
+  width: 100%;
+  min-height: 61px;
+  margin-bottom: 40px;
+}
+
 .pageBackButton {
+  position: absolute;
+  left: -1px;
+  top: 0;
   display: flex;
-  width: 44px;
-  height: 44px;
-  align-self: flex-start;
+  width: 28px;
+  height: 25.45px;
   align-items: center;
   justify-content: center;
-  margin: 90px 0 18px -8px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #9fc4e8;
   cursor: pointer;
+}
+
+.pageBackIcon {
+  display: block;
+  width: 28px;
+  height: 25.45px;
 }
 
 .operatedBy {
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 11px;
-  margin-bottom: 40px;
+  gap: 12px;
+  margin-bottom: 0;
+  padding-top: 16px;
 }
 
 .operatedBy span {
@@ -39,8 +53,8 @@
 }
 
 .healthLogoFrame {
-  width: 196px;
-  height: 44.5px;
+  width: 198.281px;
+  height: 45px;
   overflow: hidden;
   flex-shrink: 0;
 }
