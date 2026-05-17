@@ -287,6 +287,23 @@
   margin: 0;
 }
 
+.warningMessage {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px 20px;
+  border-radius: 4px;
+  background: #fff8e8;
+  box-sizing: border-box;
+  color: #ffa800;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.warningMessage p {
+  margin: 0;
+}
+
 .multiChoiceGroup {
   width: 100%;
 }

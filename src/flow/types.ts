@@ -25,6 +25,8 @@ export type QuestionStep = {
   bullets?: string[];
   bulletVariant?: "boxed" | "plain";
   infoText?: string;
+  warningOptionId?: string;
+  warningText?: string;
   blockingOptionId?: string;
   blockingError?: string;
   blockingErrorVariant?: "with-icon" | "plain";
