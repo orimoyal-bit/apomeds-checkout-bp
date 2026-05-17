@@ -25,8 +25,11 @@
 
 .operatedBy img {
   display: block;
-  width: 196px;
-  height: auto;
+  width: auto;
+  height: 44.5px;
+  max-width: 196px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .pageTitle {
