@@ -26,6 +26,7 @@ export type QuestionStep = {
   infoText?: string;
   blockingOptionId?: string;
   blockingError?: string;
+  optionLayout?: "vertical" | "horizontal";
   showIf?: {
     questionId: string;
     value: string | boolean;

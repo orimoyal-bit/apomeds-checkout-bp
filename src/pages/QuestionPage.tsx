@@ -141,7 +141,13 @@ function QuestionInput({
     case "single-choice":
     case "cards":
       return (
-        <ul className={question.type === "cards" ? shared.cardGrid : shared.optionList}>
+        <ul
+          className={
+            question.type === "cards" ? shared.cardGrid
+            : question.optionLayout === "horizontal" ? shared.optionListHorizontal
+            : shared.optionList
+          }
+        >
           {question.options?.map((opt) => (
             <li key={opt.id}>
               <button

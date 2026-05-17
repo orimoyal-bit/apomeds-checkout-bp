@@ -19,6 +19,7 @@ export const QUESTIONS: QuestionStep[] = [
     infoText: "You can only place an order for yourself and not on behalf of another person.",
     blockingOptionId: "female",
     blockingError: "We are sorry but this product can not be issued for the chosen gender.",
+    optionLayout: "horizontal",
     options: [
       { id: "male", label: "Male" },
       { id: "female", label: "Female" },
