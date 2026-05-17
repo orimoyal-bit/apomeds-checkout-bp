@@ -82,7 +82,11 @@ export function QuestionPage() {
       <h1 className={shared.pageTitle}>{question.title}</h1>
       {question.subtitle && <p className={shared.pageSubtitle}>{question.subtitle}</p>}
       {question.bullets && (
-        <ul className={shared.bulletList}>
+        <ul
+          className={
+            question.bulletVariant === "plain" ? shared.bulletListPlain : shared.bulletList
+          }
+        >
           {question.bullets.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -96,8 +100,15 @@ export function QuestionPage() {
       />
 
       {selectedBlockingAnswer && question.blockingError && (
-        <div className={shared.errorMessage} role="alert">
-          <span aria-hidden="true">ⓘ</span>
+        <div
+          className={
+            question.blockingErrorVariant === "plain" ?
+              shared.errorMessagePlain
+            : shared.errorMessage
+          }
+          role="alert"
+        >
+          {question.blockingErrorVariant !== "plain" && <span aria-hidden="true">ⓘ</span>}
           <p>{question.blockingError}</p>
         </div>
       )}

@@ -23,9 +23,11 @@ export type QuestionStep = {
   title: string;
   subtitle?: string;
   bullets?: string[];
+  bulletVariant?: "boxed" | "plain";
   infoText?: string;
   blockingOptionId?: string;
   blockingError?: string;
+  blockingErrorVariant?: "with-icon" | "plain";
   optionLayout?: "vertical" | "horizontal";
   showIf?: {
     questionId: string;

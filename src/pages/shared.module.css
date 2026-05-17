@@ -90,6 +90,37 @@
   margin-top: 10px;
 }
 
+.bulletListPlain {
+  width: 100%;
+  margin: -6px 0 24px;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.bulletListPlain li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.bulletListPlain li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-link);
+}
+
+.bulletListPlain li + li {
+  margin-top: 16px;
+}
+
 .field {
   margin-bottom: 16px;
 }
@@ -168,6 +199,7 @@
   border-color: var(--color-btn-primary);
   background: var(--color-btn-primary);
   font-weight: 500;
+  color: #fff;
   transform: translateY(-1px);
 }
 
@@ -224,11 +256,28 @@
   margin: 0;
 }
 
+.errorMessagePlain {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 24px;
+  border-radius: 4px;
+  background: rgba(248, 92, 68, 0.12);
+  box-sizing: border-box;
+  color: #f85c44;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+}
+
+.errorMessagePlain p {
+  margin: 0;
+}
+
 .yesNoRow {
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 .cardGrid {

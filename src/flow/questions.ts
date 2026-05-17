@@ -46,12 +46,22 @@ export const QUESTIONS: QuestionStep[] = [
     type: "yes-no",
     title:
       "Do you have any of the medical conditions listed below, or are you taking any of the following medications?",
-    subtitle:
-      "Angina treated with daily nitrate medication, stroke or heart attack within the last 6 months, low blood pressure (<90/50 mmHg), untreated or uncontrolled high blood pressure, liver disease, penile abnormalities, ischaemic retinopathy, alcohol and/or drug misuse, amyl nitrite (“poppers”), or Riociguat (Adempas).",
-    infoText:
-      "Warning: Combining erectile dysfunction medicines with nitrate medications or medicines that affect heart rate can cause life-threatening reactions. Please answer this question honestly.",
+    bullets: [
+      "Angina with daily nitrate use (such as Pentalong, Monoket, Corvaton, Molsidomin, Imdur, Nicorandil (Ikorel), etc.)",
+      "Stroke or heart attack during the last 6 months",
+      "Low blood pressure (<90/50 mmHG), untreated and unbalanced hypertension",
+      "Liver diseases",
+      "Anomaly of the penis",
+      "Ischemic retinopathy",
+      "Alcohol and/or drug abuse",
+      "Amyl nitrite (poppers)",
+      "Riociguat (Adempas)",
+    ],
+    bulletVariant: "plain",
     blockingOptionId: "yes",
-    blockingError: "We are very sorry, but we cannot prescribe this medication for you. Please contact your doctor.",
+    blockingError:
+      "We are very sorry, but we cannot prescribe the medication for you. Please contact your trusted doctor.",
+    blockingErrorVariant: "plain",
     required: true,
   },
   {
