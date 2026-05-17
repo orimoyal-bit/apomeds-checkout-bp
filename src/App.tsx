@@ -1,6 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { FlowProvider } from "./flow/FlowContext";
-import { QUESTIONS } from "./flow/questions";
 import { FlowShell } from "./layout/FlowShell";
 import { DeliveryPage } from "./pages/DeliveryPage";
 import { DevPage } from "./pages/DevPage";
@@ -17,9 +16,7 @@ export default function App() {
         <Routes>
           <Route element={<FlowShell />}>
             <Route index element={<WelcomePage />} />
-            {QUESTIONS.map((q) => (
-              <Route key={q.id} path={`questions/${q.id}`} element={<QuestionPage />} />
-            ))}
+            <Route path="questions/:questionId" element={<QuestionPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="product" element={<ProductPage />} />
             <Route path="delivery" element={<DeliveryPage />} />
