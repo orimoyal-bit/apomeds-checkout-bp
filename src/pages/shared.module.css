@@ -6,6 +6,21 @@
   padding-top: 14px;
 }
 
+.pageBackButton {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  margin: 90px 0 18px -8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #9fc4e8;
+  cursor: pointer;
+}
+
 .operatedBy {
   display: flex;
   width: 100%;
@@ -211,8 +226,9 @@
 
 .yesNoRow {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 24px;
 }
 
 .cardGrid {

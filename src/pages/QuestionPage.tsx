@@ -13,7 +13,7 @@ export function QuestionPage() {
   const { questionId } = useParams<{ questionId: string }>();
   const question = QUESTIONS.find((q) => q.id === questionId);
   const { answers, setAnswer } = useFlow();
-  const { goNext } = useFlowNav();
+  const { goNext, goBack } = useFlowNav();
 
   const saved = question ? answers[question.id] : undefined;
   const [local, setLocal] = useState<FlowAnswers[string] | undefined>(saved);
@@ -53,9 +53,25 @@ export function QuestionPage() {
   const autoAdvance = ["yes-no", "single-choice", "cards"].includes(question.type);
   const selectedBlockingAnswer =
     typeof local === "string" && local === question.blockingOptionId;
+  const showBackButton = question.id !== QUESTIONS[0].id;
 
   return (
     <div className={shared.questionPage}>
+      {showBackButton && (
+        <button type="button" className={shared.pageBackButton} onClick={goBack} aria-label="Go back">
+          <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">
+            <path
+              d="M23 9L13 19L23 29"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
+
       <div className={shared.operatedBy}>
         <span>Operated by</span>
         <div className={shared.healthLogoFrame}>
