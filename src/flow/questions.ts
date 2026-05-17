@@ -69,8 +69,6 @@ export const QUESTIONS: QuestionStep[] = [
     type: "multi-choice",
     title:
       "Have you been diagnosed with any of the following conditions, or are you taking any of the following medications?",
-    infoText:
-      "Combining erectile dysfunction medications with alpha blockers (e.g. alfuzosin, doxazosin, terazosin, prazosin, urapidil) can lead to life-threatening reactions. Therefore, these medications must not be taken together.",
     options: [
       { id: "none", label: "None of the below" },
       { id: "sickle-cell", label: "Sickle cell disease" },
@@ -87,6 +85,9 @@ export const QUESTIONS: QuestionStep[] = [
       },
       { id: "bosentan", label: "Bosentan (Tracleer)" },
     ],
+    warningOptionId: "alpha-blockers",
+    warningText:
+      "*Combining erectile dysfunction medications with alpha blockers (e.g. alfuzosin, doxazosin, terazosin, prazosin, urapidil) can lead to life-threatening reactions. Therefore, these medications must not be taken together.",
     required: true,
   },
   {

@@ -55,6 +55,13 @@ export function QuestionPage() {
   const autoAdvance = ["yes-no", "single-choice", "cards"].includes(question.type);
   const selectedBlockingAnswer =
     typeof local === "string" && local === question.blockingOptionId;
+  const selectedMultiChoiceAnswers = Array.isArray(local) ? local : [];
+  const selectedWarningAnswer =
+    question.warningOptionId ? selectedMultiChoiceAnswers.includes(question.warningOptionId) : false;
+  const continueLabel =
+    question.type === "multi-choice" && selectedMultiChoiceAnswers.length > 0 ?
+      `NEXT (${selectedMultiChoiceAnswers.length})`
+    : "Continue";
   const showBackButton = question.id !== QUESTIONS[0].id;
 
   return (
@@ -115,6 +122,12 @@ export function QuestionPage() {
         </div>
       )}
 
+      {selectedWarningAnswer && question.warningText && (
+        <div className={shared.warningMessage} role="note">
+          <p>{question.warningText}</p>
+        </div>
+      )}
+
       {!autoAdvance && (
         <button
           type="button"
@@ -122,7 +135,7 @@ export function QuestionPage() {
           disabled={!canContinue}
           onClick={handleContinue}
         >
-          Continue
+          {continueLabel}
         </button>
       )}
     </div>
@@ -209,6 +222,29 @@ function QuestionInput({
       };
       return (
         <div className={shared.multiChoiceGroup}>
+          {noneOption && (
+            <button
+              type="button"
+              className={[
+                shared.multiChoiceNone,
+                selected.includes(noneOption.id) ? shared.multiChoiceSelected : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => toggle(noneOption.id)}
+            >
+              {noneOption.label}
+            </button>
+          )}
+
+          {noneOption && otherOptions.length > 0 && (
+            <div className={shared.multiChoiceDivider} aria-hidden="true">
+              <span />
+              <strong>OR</strong>
+              <span />
+            </div>
+          )}
+
           <ul className={shared.multiChoiceList}>
             {otherOptions.map((opt) => (
               <li key={opt.id}>
@@ -228,29 +264,6 @@ function QuestionInput({
               </li>
             ))}
           </ul>
-
-          {noneOption && otherOptions.length > 0 && (
-            <div className={shared.multiChoiceDivider} aria-hidden="true">
-              <span />
-              <strong>OR</strong>
-              <span />
-            </div>
-          )}
-
-          {noneOption && (
-            <button
-              type="button"
-              className={[
-                shared.multiChoiceNone,
-                selected.includes(noneOption.id) ? shared.multiChoiceSelected : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() => toggle(noneOption.id)}
-            >
-              {noneOption.label}
-            </button>
-          )}
         </div>
       );
     }
