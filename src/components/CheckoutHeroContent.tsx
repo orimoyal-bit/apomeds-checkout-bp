@@ -4,6 +4,7 @@ import styles from "./CheckoutHeroContent.module.css";
 export type CheckoutHeroContentProps = {
   title?: string;
   primaryCtaLabel?: string;
+  primaryCtaHref?: string;
   secondaryCtaLabel?: string | null;
   onPrimaryClick?: () => void;
   onSecondaryClick?: () => void;
@@ -16,6 +17,7 @@ const HERO_ILLUSTRATION_SRC =
 export function CheckoutHeroContent({
   title = "You're In Good Hands",
   primaryCtaLabel = "Start online consultation",
+  primaryCtaHref,
   secondaryCtaLabel = null,
   onPrimaryClick,
   onSecondaryClick,
@@ -51,9 +53,14 @@ export function CheckoutHeroContent({
       </p>
 
       <div className={styles.actions}>
-        <button type="button" className={styles.primaryBtn} onClick={onPrimaryClick}>
-          {primaryCtaLabel}
-        </button>
+        {primaryCtaHref ?
+          <a className={styles.primaryBtn} href={primaryCtaHref} onClick={onPrimaryClick}>
+            {primaryCtaLabel}
+          </a>
+        : <button type="button" className={styles.primaryBtn} onClick={onPrimaryClick}>
+            {primaryCtaLabel}
+          </button>
+        }
         {secondaryCtaLabel && (
           <button type="button" className={styles.secondaryBtn} onClick={onSecondaryClick}>
             {secondaryCtaLabel}

@@ -91,6 +91,7 @@
   line-height: var(--line-height-btn-xl);
   color: var(--color-text-primary);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .primaryBtn:hover {
