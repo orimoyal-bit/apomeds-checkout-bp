@@ -32,13 +32,21 @@
   line-height: 1;
 }
 
+.logoFrame {
+  display: flex;
+  width: 120px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
 .logo {
   display: block;
+  width: 119.7px;
   height: 15.2px;
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  object-position: center;
+  object-fit: fill;
 }
 
 .progress {

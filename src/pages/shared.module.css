@@ -23,13 +23,18 @@
   white-space: nowrap;
 }
 
-.operatedBy img {
-  display: block;
-  width: auto;
+.healthLogoFrame {
+  width: 196px;
   height: 44.5px;
-  max-width: 196px;
-  object-fit: contain;
-  object-position: left center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.healthLogoFrame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 .pageTitle {

@@ -24,7 +24,9 @@ export function ConsultationHeader({
             <span aria-hidden="true">‹</span>
           </button>
         )}
-        <img className={styles.logo} src={LOGO_SRC} alt="Apomeds" />
+        <div className={styles.logoFrame}>
+          <img className={styles.logo} src={LOGO_SRC} alt="Apomeds" />
+        </div>
       </div>
 
       <div className={styles.progress} aria-label={`Consultation step ${activeStep} of ${totalSteps}`}>

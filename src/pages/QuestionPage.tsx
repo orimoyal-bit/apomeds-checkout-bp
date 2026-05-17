@@ -50,7 +50,9 @@ export function QuestionPage() {
     <div className={shared.questionPage}>
       <div className={shared.operatedBy}>
         <span>Operated by</span>
-        <img src={HEALTH_AND_GO_LOGO} alt="Health&go" />
+        <div className={shared.healthLogoFrame}>
+          <img src={HEALTH_AND_GO_LOGO} alt="Health&go" />
+        </div>
       </div>
 
       <h1 className={shared.pageTitle}>{question.title}</h1>
