@@ -1,0 +1,63 @@
+.header {
+  width: 100%;
+  padding: var(--spacing-header-pt) 0 var(--spacing-header-pb);
+  box-sizing: border-box;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 24px;
+  padding: 0 var(--spacing-page-x);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Figma: logo instance 120×24, artwork ~119.7×15.2 — don't force 5:1 or it stretches */
+.logoWrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 24px;
+  max-width: 120px;
+}
+
+.logo {
+  display: block;
+  height: 15.2px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.trusted {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.trustedIcon {
+  display: block;
+  width: 26.5px;
+  height: 26.8px;
+  object-fit: contain;
+}
+
+.rating {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  line-height: var(--line-height-body);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.star {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}

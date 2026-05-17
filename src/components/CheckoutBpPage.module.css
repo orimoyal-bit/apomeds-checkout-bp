@@ -1,0 +1,15 @@
+.page {
+  margin: 0 auto;
+  max-width: var(--max-width-mobile);
+  min-height: 100dvh;
+  background: var(--color-bg-cream);
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  background: var(--color-bg-cream);
+  padding: 54px var(--spacing-page-x) 24px;
+  box-sizing: border-box;
+}

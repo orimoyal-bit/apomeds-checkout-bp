@@ -1,0 +1,28 @@
+:root {
+  --color-bg-cream: #fff8d6;
+  --color-bg-white: #ffffff;
+  --color-text-primary: #112950;
+  --color-text-link: #0951aa;
+  --color-link-secondary: #707070;
+  --color-btn-primary: #ffa800;
+  --color-btn-primary-border: #ffa800;
+  --color-star: #e85d4c;
+
+  --font-family: "Roboto", system-ui, sans-serif;
+  --font-size-heading-xl: 40px;
+  --line-height-heading-xl: 50px;
+  --font-size-body: 16px;
+  --line-height-body: 24px;
+  --font-size-btn-xl: 18px;
+  --line-height-btn-xl: 24px;
+  --font-size-link: 14px;
+  --line-height-link: 20px;
+
+  --radius-btn: 8px;
+  --spacing-page-x: 16px;
+  --spacing-header-pt: 12px;
+  --spacing-header-pb: 16px;
+  --spacing-content-gap: 10px;
+  --spacing-btn-gap: 8px;
+  --max-width-mobile: 375px;
+}

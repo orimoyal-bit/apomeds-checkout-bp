@@ -1,0 +1,113 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-content-gap);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.illustrationWrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.illustration {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  width: 176px;
+  height: 244px;
+  object-fit: contain;
+}
+
+.title {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-heading-xl);
+  font-weight: 600;
+  line-height: var(--line-height-heading-xl);
+  text-align: center;
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+.description {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  text-align: center;
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+.description strong {
+  font-weight: 500;
+}
+
+.descriptionLink {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+
+.descriptionLink:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-btn-gap);
+  width: 100%;
+}
+
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  padding: 0 24px;
+  border: 1px solid var(--color-btn-primary-border);
+  border-radius: var(--radius-btn);
+  background: var(--color-btn-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-btn-xl);
+  font-weight: 500;
+  line-height: var(--line-height-btn-xl);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  filter: brightness(0.97);
+}
+
+.primaryBtn:active {
+  filter: brightness(0.94);
+}
+
+.secondaryBtn {
+  padding: 4px 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-size-link);
+  font-weight: 500;
+  line-height: var(--line-height-link);
+  color: var(--color-link-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.secondaryBtn:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,231 @@
+import { useMemo, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
+import { useFlow } from "../flow/FlowContext";
+import { QUESTIONS } from "../flow/questions";
+import { useFlowNav } from "../flow/useFlowNav";
+import type { FlowAnswers } from "../flow/types";
+import shared from "./shared.module.css";
+
+export function QuestionPage() {
+  const { questionId } = useParams<{ questionId: string }>();
+  const question = QUESTIONS.find((q) => q.id === questionId);
+  const { answers, setAnswer } = useFlow();
+  const { goNext } = useFlowNav();
+
+  const saved = question ? answers[question.id] : undefined;
+  const [local, setLocal] = useState<FlowAnswers[string] | undefined>(saved);
+
+  const canContinue = useMemo(() => {
+    if (!question) return false;
+    if (!question.required) return true;
+    if (question.type === "checkbox") return local === true;
+    if (local === undefined || local === "" || (Array.isArray(local) && local.length === 0))
+      return false;
+    return true;
+  }, [question, local]);
+
+  if (!question) return <Navigate to="/" replace />;
+
+  const commit = (value: FlowAnswers[string]) => {
+    setLocal(value);
+    setAnswer(question.id, value);
+  };
+
+  const handleContinue = () => {
+    if (local !== undefined) setAnswer(question.id, local);
+    goNext();
+  };
+
+  return (
+    <div>
+      <h1 className={shared.pageTitle}>{question.title}</h1>
+      {question.subtitle && <p className={shared.pageSubtitle}>{question.subtitle}</p>}
+
+      <QuestionInput question={question} value={local} onChange={commit} />
+
+      <button
+        type="button"
+        className={shared.continueBtn}
+        disabled={!canContinue}
+        onClick={handleContinue}
+      >
+        Weiter
+      </button>
+    </div>
+  );
+}
+
+function QuestionInput({
+  question,
+  value,
+  onChange,
+}: {
+  question: (typeof QUESTIONS)[0];
+  value: FlowAnswers[string] | undefined;
+  onChange: (v: FlowAnswers[string]) => void;
+}) {
+  switch (question.type) {
+    case "yes-no":
+      return (
+        <div className={shared.yesNoRow}>
+          {(["Ja", "Nein"] as const).map((label, i) => (
+            <button
+              key={label}
+              type="button"
+              className={[
+                shared.optionBtn,
+                value === (i === 0 ? "yes" : "no") ? shared.optionBtnSelected : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => onChange(i === 0 ? "yes" : "no")}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      );
+
+    case "single-choice":
+    case "cards":
+      return (
+        <ul className={question.type === "cards" ? shared.cardGrid : shared.optionList}>
+          {question.options?.map((opt) => (
+            <li key={opt.id}>
+              <button
+                type="button"
+                className={[
+                  question.type === "cards" ? shared.cardOption : shared.optionBtn,
+                  value === opt.id ?
+                    question.type === "cards" ?
+                      shared.cardOptionSelected
+                    : shared.optionBtnSelected
+                  : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() => onChange(opt.id)}
+              >
+                {opt.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      );
+
+    case "multi-choice": {
+      const selected = Array.isArray(value) ? value : [];
+      const toggle = (id: string) => {
+        const next = selected.includes(id) ?
+          selected.filter((x) => x !== id)
+        : [...selected, id];
+        onChange(next);
+      };
+      return (
+        <ul className={shared.optionList}>
+          {question.options?.map((opt) => (
+            <li key={opt.id}>
+              <button
+                type="button"
+                className={[
+                  shared.optionBtn,
+                  selected.includes(opt.id) ? shared.optionBtnSelected : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() => toggle(opt.id)}
+              >
+                {opt.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    case "checkbox": {
+      const checked = value === true;
+      return (
+        <button
+          type="button"
+          className={[shared.optionBtn, checked ? shared.optionBtnSelected : ""]
+            .filter(Boolean)
+            .join(" ")}
+          onClick={() => onChange(!checked)}
+        >
+          {question.options?.[0]?.label ?? "Bestätigen"}
+        </button>
+      );
+    }
+
+    case "scale": {
+      const min = question.min ?? 1;
+      const max = question.max ?? 5;
+      const nums = Array.from({ length: max - min + 1 }, (_, i) => min + i);
+      return (
+        <div className={shared.scaleRow}>
+          {nums.map((n) => (
+            <button
+              key={n}
+              type="button"
+              className={[
+                shared.scaleBtn,
+                value === n ? shared.scaleBtnSelected : "",
+              ]
+                  .filter(Boolean)
+                  .join(" ")}
+              onClick={() => onChange(n)}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    case "textarea":
+      return (
+        <textarea
+          className={shared.textarea}
+          placeholder={question.placeholder}
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
+
+    case "date":
+      return (
+        <input
+          type="date"
+          className={shared.input}
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
+
+    case "number":
+      return (
+        <input
+          type="number"
+          className={shared.input}
+          placeholder={question.placeholder}
+          min={question.min}
+          max={question.max}
+          value={typeof value === "number" ? value : ""}
+          onChange={(e) => onChange(Number(e.target.value))}
+        />
+      );
+
+    case "text":
+    default:
+      return (
+        <input
+          type="text"
+          className={shared.input}
+          placeholder={question.placeholder}
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
+  }
+}
