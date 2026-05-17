@@ -15,11 +15,21 @@ export type QuestionOption = {
   label: string;
 };
 
+export type AnswerValue = string | string[] | number | boolean;
+
 export type QuestionStep = {
   id: string;
   type: QuestionType;
   title: string;
   subtitle?: string;
+  bullets?: string[];
+  infoText?: string;
+  blockingOptionId?: string;
+  blockingError?: string;
+  showIf?: {
+    questionId: string;
+    value: string | boolean;
+  };
   options?: QuestionOption[];
   placeholder?: string;
   min?: number;
@@ -36,7 +46,7 @@ export type FlowStep =
   | { kind: "payment"; path: "/payment"; label: "Payment" }
   | { kind: "dev"; path: "/dev"; label: string };
 
-export type FlowAnswers = Record<string, string | string[] | number | boolean>;
+export type FlowAnswers = Record<string, AnswerValue>;
 
 export type FeatureFlags = {
   skipQuestions: boolean;

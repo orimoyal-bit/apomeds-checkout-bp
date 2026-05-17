@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useFlow } from "../flow/FlowContext";
 import { QUESTIONS } from "../flow/questions";
@@ -18,6 +18,10 @@ export function QuestionPage() {
   const saved = question ? answers[question.id] : undefined;
   const [local, setLocal] = useState<FlowAnswers[string] | undefined>(saved);
 
+  useEffect(() => {
+    setLocal(saved);
+  }, [question?.id, saved]);
+
   const canContinue = useMemo(() => {
     if (!question) return false;
     if (!question.required) return true;
@@ -35,16 +39,20 @@ export function QuestionPage() {
   };
 
   const handleContinue = () => {
+    const nextAnswers = local === undefined ? answers : { ...answers, [question.id]: local };
     if (local !== undefined) setAnswer(question.id, local);
-    goNext();
+    goNext(nextAnswers);
   };
 
   const handleAutoSelect = (value: FlowAnswers[string]) => {
     commit(value);
-    window.setTimeout(goNext, 180);
+    if (typeof value === "string" && value === question.blockingOptionId) return;
+    window.setTimeout(() => goNext({ ...answers, [question.id]: value }), 180);
   };
 
   const autoAdvance = ["yes-no", "single-choice", "cards"].includes(question.type);
+  const selectedBlockingAnswer =
+    typeof local === "string" && local === question.blockingOptionId;
 
   return (
     <div className={shared.questionPage}>
@@ -57,12 +65,33 @@ export function QuestionPage() {
 
       <h1 className={shared.pageTitle}>{question.title}</h1>
       {question.subtitle && <p className={shared.pageSubtitle}>{question.subtitle}</p>}
+      {question.bullets && (
+        <ul className={shared.bulletList}>
+          {question.bullets.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
 
       <QuestionInput
         question={question}
         value={local}
         onChange={autoAdvance ? handleAutoSelect : commit}
       />
+
+      {selectedBlockingAnswer && question.blockingError && (
+        <div className={shared.errorMessage} role="alert">
+          <span aria-hidden="true">ⓘ</span>
+          <p>{question.blockingError}</p>
+        </div>
+      )}
+
+      {!selectedBlockingAnswer && question.infoText && (
+        <div className={shared.infoMessage}>
+          <span aria-hidden="true">i</span>
+          <p>{question.infoText}</p>
+        </div>
+      )}
 
       {!autoAdvance && (
         <button
@@ -139,9 +168,13 @@ function QuestionInput({
     case "multi-choice": {
       const selected = Array.isArray(value) ? value : [];
       const toggle = (id: string) => {
+        if (id === "none") {
+          onChange(selected.includes("none") ? [] : ["none"]);
+          return;
+        }
         const next = selected.includes(id) ?
           selected.filter((x) => x !== id)
-        : [...selected, id];
+        : [...selected.filter((x) => x !== "none"), id];
         onChange(next);
       };
       return (
