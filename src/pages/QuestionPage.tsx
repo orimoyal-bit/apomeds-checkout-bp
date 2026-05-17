@@ -38,6 +38,9 @@ export function QuestionPage() {
   const commit = (value: FlowAnswers[string]) => {
     setLocal(value);
     setAnswer(question.id, value);
+    if (question.type === "multi-choice" && Array.isArray(value) && value.length === 1 && value[0] === "none") {
+      window.setTimeout(() => goNext({ ...answers, [question.id]: value }), 180);
+    }
   };
 
   const handleContinue = () => {
@@ -62,6 +65,8 @@ export function QuestionPage() {
     question.type === "multi-choice" && selectedMultiChoiceAnswers.length > 0 ?
       `NEXT (${selectedMultiChoiceAnswers.length})`
     : "Continue";
+  const showContinueButton =
+    !autoAdvance && !(question.type === "multi-choice" && selectedMultiChoiceAnswers.length === 0);
   const showBackButton = question.id !== QUESTIONS[0].id;
 
   return (
@@ -128,7 +133,7 @@ export function QuestionPage() {
         </div>
       )}
 
-      {!autoAdvance && (
+      {showContinueButton && (
         <button
           type="button"
           className={shared.continueBtn}
