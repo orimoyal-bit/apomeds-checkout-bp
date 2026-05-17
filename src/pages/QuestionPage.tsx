@@ -209,29 +209,6 @@ function QuestionInput({
       };
       return (
         <div className={shared.multiChoiceGroup}>
-          {noneOption && (
-            <button
-              type="button"
-              className={[
-                shared.multiChoiceNone,
-                selected.includes(noneOption.id) ? shared.multiChoiceSelected : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() => toggle(noneOption.id)}
-            >
-              {noneOption.label}
-            </button>
-          )}
-
-          {noneOption && otherOptions.length > 0 && (
-            <div className={shared.multiChoiceDivider} aria-hidden="true">
-              <span />
-              <strong>OR</strong>
-              <span />
-            </div>
-          )}
-
           <ul className={shared.multiChoiceList}>
             {otherOptions.map((opt) => (
               <li key={opt.id}>
@@ -251,6 +228,29 @@ function QuestionInput({
               </li>
             ))}
           </ul>
+
+          {noneOption && otherOptions.length > 0 && (
+            <div className={shared.multiChoiceDivider} aria-hidden="true">
+              <span />
+              <strong>OR</strong>
+              <span />
+            </div>
+          )}
+
+          {noneOption && (
+            <button
+              type="button"
+              className={[
+                shared.multiChoiceNone,
+                selected.includes(noneOption.id) ? shared.multiChoiceSelected : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => toggle(noneOption.id)}
+            >
+              {noneOption.label}
+            </button>
+          )}
         </div>
       );
     }

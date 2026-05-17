@@ -295,7 +295,7 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -306,36 +306,36 @@
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border: 1px solid #eeeeee;
-  border-radius: 8px;
+  gap: 15px;
+  padding: 10px;
+  border: 1px solid #9abce1;
+  border-radius: 5px;
   background: #fff;
   box-sizing: border-box;
   color: var(--color-text-primary);
   cursor: pointer;
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 16px;
   text-align: left;
 }
 
 .multiChoiceOption {
-  min-height: 46px;
+  min-height: 38px;
 }
 
 .multiChoiceNone {
-  min-height: 48px;
+  min-height: 38px;
 }
 
 .multiChoiceCheckbox {
   display: block;
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  border: 2px solid #9aa0a6;
-  border-radius: 3px;
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  border: 1px solid #9abce1;
+  border-radius: 2px;
   box-sizing: border-box;
 }
 
@@ -356,12 +356,12 @@
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 8px;
-  margin: 18px 0 16px;
+  gap: 10px;
+  margin: 5px 0 20px;
   color: var(--color-text-primary);
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 22px;
   text-align: center;
 }
 
@@ -369,7 +369,7 @@
   height: 1px;
   flex: 1;
   border-radius: 1px;
-  background: #c9c6c6;
+  background: #9abce1;
 }
 
 .multiChoiceDivider strong {
