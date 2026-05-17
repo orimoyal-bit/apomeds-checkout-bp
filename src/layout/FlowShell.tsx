@@ -3,7 +3,6 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ConsultationHeader } from "../components/ConsultationHeader";
 import { CheckoutHeader } from "../components/CheckoutHeader";
 import { useFlow } from "../flow/FlowContext";
-import { QUESTIONS } from "../flow/questions";
 import { getStepIndex, getVisibleSteps } from "../flow/steps";
 import styles from "./FlowShell.module.css";
 
@@ -14,7 +13,7 @@ export function FlowShell() {
 
   const isWelcome = pathname === "/";
   const isDev = pathname === "/dev";
-  const usesCreamBackground = isWelcome || pathname === `/questions/${QUESTIONS[0].id}`;
+  const usesCreamBackground = isWelcome;
   const visibleProgressSteps = getVisibleSteps(answers).filter((s) => s.kind !== "dev");
   const progressIndex = getStepIndex(pathname, answers);
   const progressTotal = visibleProgressSteps.length - 1;
