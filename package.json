@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:open": "vite --open /#/",
     "dev:mobile": "node scripts/print-lan-url.mjs; vite --host 0.0.0.0",
     "lan": "node scripts/print-lan-url.mjs",
     "build": "tsc -b && vite build",
