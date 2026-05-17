@@ -4,7 +4,7 @@ import styles from "./CheckoutHeroContent.module.css";
 export type CheckoutHeroContentProps = {
   title?: string;
   primaryCtaLabel?: string;
-  secondaryCtaLabel?: string;
+  secondaryCtaLabel?: string | null;
   onPrimaryClick?: () => void;
   onSecondaryClick?: () => void;
   className?: string;
@@ -14,9 +14,9 @@ const HERO_ILLUSTRATION_SRC =
   "https://www.figma.com/api/mcp/asset/754f1f11-74e8-4718-9dbf-45b2923da7f4";
 
 export function CheckoutHeroContent({
-  title = "Sie sind in guten Händen",
-  primaryCtaLabel = "Jetzt starten",
-  secondaryCtaLabel = "Ich habe bereits ein Rezept",
+  title = "You're In Good Hands",
+  primaryCtaLabel = "Start online consultation",
+  secondaryCtaLabel = null,
   onPrimaryClick,
   onSecondaryClick,
   className,
@@ -41,20 +41,24 @@ export function CheckoutHeroContent({
       </h1>
 
       <p className={styles.description}>
-        Sie werden zu <strong>Health&amp;Go</strong> weitergeleitet, wo ein{" "}
+        The medical service is operated by{" "}
+        <strong className={styles.healthBrand}>Health&amp;go</strong>.{" "}
         <a href="#arzt" className={styles.descriptionLink}>
-          approbierter EU-Arzt
+          UK-licensed
         </a>{" "}
-        Ihre Angaben prüft. Bitte beantworten Sie die Fragen wahrheitsgemäß.
+        doctors will review your medical information. To ensure the best possible care,
+        please answer the following questions truthfully.
       </p>
 
       <div className={styles.actions}>
         <button type="button" className={styles.primaryBtn} onClick={onPrimaryClick}>
           {primaryCtaLabel}
         </button>
-        <button type="button" className={styles.secondaryBtn} onClick={onSecondaryClick}>
-          {secondaryCtaLabel}
-        </button>
+        {secondaryCtaLabel && (
+          <button type="button" className={styles.secondaryBtn} onClick={onSecondaryClick}>
+            {secondaryCtaLabel}
+          </button>
+        )}
       </div>
     </section>
   );

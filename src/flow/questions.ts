@@ -3,11 +3,14 @@ import type { QuestionStep } from "./types";
 /** 15 question prototypes — mix types for UX / logic testing */
 export const QUESTIONS: QuestionStep[] = [
   {
-    id: "q1-consent",
-    type: "checkbox",
-    title: "Einwilligung",
-    subtitle: "Ich bestätige, dass ich mindestens 18 Jahre alt bin.",
-    options: [{ id: "age", label: "Ja, ich bin 18 oder älter" }],
+    id: "q1-erection-frequency",
+    type: "single-choice",
+    title: "How often do you have difficulty getting/maintaining an erection?",
+    options: [
+      { id: "occasionally", label: "Occasionally" },
+      { id: "regularly", label: "Regularly" },
+      { id: "rarely", label: "Rarely" },
+    ],
     required: true,
   },
   {

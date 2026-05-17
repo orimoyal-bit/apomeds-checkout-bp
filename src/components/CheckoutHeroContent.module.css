@@ -52,9 +52,15 @@
   font-weight: 500;
 }
 
+.healthBrand {
+  color: #178f65;
+  font-weight: 600;
+}
+
 .descriptionLink {
-  color: var(--color-text-link);
-  text-decoration: none;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .descriptionLink:hover {

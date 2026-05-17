@@ -6,6 +6,9 @@ import { useFlowNav } from "../flow/useFlowNav";
 import type { FlowAnswers } from "../flow/types";
 import shared from "./shared.module.css";
 
+const HEALTH_AND_GO_LOGO =
+  "https://www.figma.com/api/mcp/asset/c8aa0327-eb04-49e2-b29c-a9893517cb08";
+
 export function QuestionPage() {
   const { questionId } = useParams<{ questionId: string }>();
   const question = QUESTIONS.find((q) => q.id === questionId);
@@ -36,21 +39,39 @@ export function QuestionPage() {
     goNext();
   };
 
+  const handleAutoSelect = (value: FlowAnswers[string]) => {
+    commit(value);
+    window.setTimeout(goNext, 180);
+  };
+
+  const autoAdvance = ["yes-no", "single-choice", "cards"].includes(question.type);
+
   return (
-    <div>
+    <div className={shared.questionPage}>
+      <div className={shared.operatedBy}>
+        <span>Operated by</span>
+        <img src={HEALTH_AND_GO_LOGO} alt="Health&go" />
+      </div>
+
       <h1 className={shared.pageTitle}>{question.title}</h1>
       {question.subtitle && <p className={shared.pageSubtitle}>{question.subtitle}</p>}
 
-      <QuestionInput question={question} value={local} onChange={commit} />
+      <QuestionInput
+        question={question}
+        value={local}
+        onChange={autoAdvance ? handleAutoSelect : commit}
+      />
 
-      <button
-        type="button"
-        className={shared.continueBtn}
-        disabled={!canContinue}
-        onClick={handleContinue}
-      >
-        Weiter
-      </button>
+      {!autoAdvance && (
+        <button
+          type="button"
+          className={shared.continueBtn}
+          disabled={!canContinue}
+          onClick={handleContinue}
+        >
+          Continue
+        </button>
+      )}
     </div>
   );
 }
@@ -68,7 +89,7 @@ function QuestionInput({
     case "yes-no":
       return (
         <div className={shared.yesNoRow}>
-          {(["Ja", "Nein"] as const).map((label, i) => (
+          {(["Yes", "No"] as const).map((label, i) => (
             <button
               key={label}
               type="button"
