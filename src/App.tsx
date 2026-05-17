@@ -1,4 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { FlowProvider } from "./flow/FlowContext";
 import { FlowShell } from "./layout/FlowShell";
 import { DeliveryPage } from "./pages/DeliveryPage";
@@ -10,9 +11,21 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { WelcomePage } from "./pages/WelcomePage";
 
 export default function App() {
+  const [hashKey, setHashKey] = useState(() => window.location.hash || "#/");
+
+  useEffect(() => {
+    const syncHash = () => setHashKey(window.location.hash || "#/");
+    window.addEventListener("hashchange", syncHash);
+    window.addEventListener("popstate", syncHash);
+    return () => {
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("popstate", syncHash);
+    };
+  }, []);
+
   return (
     <FlowProvider>
-      <HashRouter>
+      <HashRouter key={hashKey}>
         <Routes>
           <Route element={<FlowShell />}>
             <Route index element={<WelcomePage />} />
