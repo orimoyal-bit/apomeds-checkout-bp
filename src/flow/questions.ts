@@ -18,7 +18,7 @@ export const QUESTIONS: QuestionStep[] = [
     title: "What sex were you assigned at birth?",
     infoText: "You can only place an order for yourself and not on behalf of another person.",
     blockingOptionId: "female",
-    blockingError: "We’re sorry, but this medication cannot be prescribed for the sex you selected.",
+    blockingError: "We are sorry but this product can not be issued for the chosen gender.",
     options: [
       { id: "male", label: "Male" },
       { id: "female", label: "Female" },
