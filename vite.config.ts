@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/apomeds-checkout-bp/",
+  base: process.env.GITHUB_PAGES === "true" ? "/apomeds-checkout-bp/" : "/",
   server: {
     port: 5173,
     strictPort: true,

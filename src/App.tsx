@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { FlowProvider } from "./flow/FlowContext";
 import { QUESTIONS } from "./flow/questions";
 import { FlowShell } from "./layout/FlowShell";
@@ -13,7 +13,7 @@ import { WelcomePage } from "./pages/WelcomePage";
 export default function App() {
   return (
     <FlowProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route element={<FlowShell />}>
             <Route index element={<WelcomePage />} />
@@ -28,7 +28,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </FlowProvider>
   );
 }
