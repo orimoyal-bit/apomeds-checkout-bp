@@ -347,6 +347,7 @@
 }
 
 .multiChoiceCheckbox {
+  position: relative;
   display: block;
   width: 12px;
   height: 12px;
@@ -357,16 +358,25 @@
 }
 
 .multiChoiceSelected {
-  border-color: var(--color-btn-primary);
-  background: rgba(255, 168, 0, 0.08);
+  border-color: #9abce1;
+  background: #fff;
 }
 
 .multiChoiceSelected .multiChoiceCheckbox {
-  border-color: var(--color-btn-primary);
-  background:
-    linear-gradient(45deg, transparent 57%, #fff 57%),
-    linear-gradient(-45deg, transparent 45%, #fff 45%),
-    var(--color-btn-primary);
+  border-color: #0951aa;
+  background: #0951aa;
+}
+
+.multiChoiceSelected .multiChoiceCheckbox::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 4px;
+  height: 7px;
+  border: solid #fff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
 }
 
 .multiChoiceDivider {
