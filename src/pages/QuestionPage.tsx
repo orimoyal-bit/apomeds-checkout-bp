@@ -195,6 +195,8 @@ function QuestionInput({
 
     case "multi-choice": {
       const selected = Array.isArray(value) ? value : [];
+      const noneOption = question.options?.find((opt) => opt.id === "none");
+      const otherOptions = question.options?.filter((opt) => opt.id !== "none") ?? [];
       const toggle = (id: string) => {
         if (id === "none") {
           onChange(selected.includes("none") ? [] : ["none"]);
@@ -206,24 +208,50 @@ function QuestionInput({
         onChange(next);
       };
       return (
-        <ul className={shared.optionList}>
-          {question.options?.map((opt) => (
-            <li key={opt.id}>
-              <button
-                type="button"
-                className={[
-                  shared.optionBtn,
-                  selected.includes(opt.id) ? shared.optionBtnSelected : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                onClick={() => toggle(opt.id)}
-              >
-                {opt.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className={shared.multiChoiceGroup}>
+          {noneOption && (
+            <button
+              type="button"
+              className={[
+                shared.multiChoiceNone,
+                selected.includes(noneOption.id) ? shared.multiChoiceSelected : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => toggle(noneOption.id)}
+            >
+              {noneOption.label}
+            </button>
+          )}
+
+          {noneOption && otherOptions.length > 0 && (
+            <div className={shared.multiChoiceDivider} aria-hidden="true">
+              <span />
+              <strong>OR</strong>
+              <span />
+            </div>
+          )}
+
+          <ul className={shared.multiChoiceList}>
+            {otherOptions.map((opt) => (
+              <li key={opt.id}>
+                <button
+                  type="button"
+                  className={[
+                    shared.multiChoiceOption,
+                    selected.includes(opt.id) ? shared.multiChoiceSelected : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  onClick={() => toggle(opt.id)}
+                >
+                  <span className={shared.multiChoiceCheckbox} aria-hidden="true" />
+                  <span>{opt.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     }
 

@@ -287,6 +287,95 @@
   margin: 0;
 }
 
+.multiChoiceGroup {
+  width: 100%;
+}
+
+.multiChoiceList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.multiChoiceNone,
+.multiChoiceOption {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.multiChoiceOption {
+  min-height: 46px;
+}
+
+.multiChoiceNone {
+  min-height: 48px;
+}
+
+.multiChoiceCheckbox {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border: 2px solid #9aa0a6;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.multiChoiceSelected {
+  border-color: var(--color-btn-primary);
+  background: rgba(255, 168, 0, 0.08);
+}
+
+.multiChoiceSelected .multiChoiceCheckbox {
+  border-color: var(--color-btn-primary);
+  background:
+    linear-gradient(45deg, transparent 57%, #fff 57%),
+    linear-gradient(-45deg, transparent 45%, #fff 45%),
+    var(--color-btn-primary);
+}
+
+.multiChoiceDivider {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 16px;
+  color: var(--color-text-primary);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.multiChoiceDivider span {
+  height: 1px;
+  flex: 1;
+  border-radius: 1px;
+  background: #c9c6c6;
+}
+
+.multiChoiceDivider strong {
+  font-weight: 400;
+}
+
 .yesNoRow {
   display: grid;
   width: 100%;
