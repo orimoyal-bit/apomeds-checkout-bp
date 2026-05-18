@@ -8,7 +8,8 @@ export type QuestionType =
   | "date"
   | "textarea"
   | "checkbox"
-  | "cards";
+  | "cards"
+  | "info";
 
 export type QuestionOption = {
   id: string;

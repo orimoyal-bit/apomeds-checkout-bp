@@ -455,17 +455,34 @@
 }
 
 .continueBtn {
+  position: relative;
+  display: flex;
   width: 100%;
   height: 56px;
+  align-items: center;
+  justify-content: center;
   margin-top: 24px;
   border: 1px solid var(--color-btn-primary-border);
   border-radius: var(--radius-btn);
   background: var(--color-btn-primary);
   font-family: var(--font-family);
   font-size: var(--font-size-btn-xl);
-  font-weight: 500;
-  color: var(--color-text-primary);
+  font-weight: 700;
+  color: #fff;
   cursor: pointer;
+}
+
+.continueBtn::after {
+  content: "";
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  width: 18px;
+  height: 14px;
+  background:
+    linear-gradient(#fff, #fff) left 6px / 16px 4px no-repeat,
+    linear-gradient(45deg, transparent 45%, #fff 45% 62%, transparent 62%) right center / 12px 12px no-repeat;
+  transform: translateY(-50%);
 }
 
 .continueBtn:disabled {

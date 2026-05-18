@@ -135,13 +135,11 @@ export const QUESTIONS: QuestionStep[] = [
   },
   {
     id: "q9-gp-acknowledgement",
-    type: "checkbox",
+    type: "info",
     title:
       "I understand that it is advisable to inform my GP about this treatment to help prevent potential negative effects on future treatments and/or health issues.",
     subtitle:
       "We can also inform your GP on your behalf. If you would like us to do so, please email your GP’s contact details to support@healthandgo.com.",
-    options: [{ id: "acknowledge", label: "I understand" }],
-    required: true,
   },
   {
     id: "q10-consent",

@@ -64,7 +64,7 @@ export function QuestionPage() {
   const continueLabel =
     question.type === "multi-choice" && selectedMultiChoiceAnswers.length > 0 ?
       `NEXT (${selectedMultiChoiceAnswers.length})`
-    : "Continue";
+    : "NEXT";
   const showContinueButton =
     !autoAdvance && !(question.type === "multi-choice" && selectedMultiChoiceAnswers.length === 0);
   const showBackButton = question.id !== QUESTIONS[0].id;
@@ -272,6 +272,9 @@ function QuestionInput({
         </div>
       );
     }
+
+    case "info":
+      return null;
 
     case "checkbox": {
       const checked = value === true;
