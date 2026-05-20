@@ -43,7 +43,13 @@ export function QuestionPage() {
       setConsentReachedEnd(true);
       return;
     }
-    const remaining = el.scrollHeight - el.scrollTop - el.clientHeight;
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    const hasOverflow = scrollHeight - clientHeight > 2;
+    if (!hasOverflow) {
+      setConsentReachedEnd(true);
+      return;
+    }
+    const remaining = scrollHeight - scrollTop - clientHeight;
     setConsentReachedEnd(remaining <= 32);
   };
 
@@ -51,10 +57,16 @@ export function QuestionPage() {
     if (!question || !isConsentScroll) return;
     const el = scrollRef.current;
     updateConsentScrollProgress();
-    if (!el) return;
+    const raf = window.requestAnimationFrame(() => updateConsentScrollProgress());
+    if (!el) {
+      return () => window.cancelAnimationFrame(raf);
+    }
     const ro = new ResizeObserver(() => updateConsentScrollProgress());
     ro.observe(el);
-    return () => ro.disconnect();
+    return () => {
+      window.cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
   }, [isConsentScroll, question, question?.bullets, question?.id, answers]);
 
   const jumpConsentToBottom = () => {
