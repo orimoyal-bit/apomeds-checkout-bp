@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { ContinueCtaButton } from "../components/ContinueCtaButton";
 import { useFlow } from "../flow/FlowContext";
@@ -20,7 +20,6 @@ export function QuestionPage() {
 
   const saved = question ? answers[question.id] : undefined;
   const [local, setLocal] = useState<FlowAnswers[string] | undefined>(saved);
-  const scrollRef = useRef<HTMLDivElement>(null);
   const isConsentScroll = question?.type === "consent-scroll";
   const [consentReachedEnd, setConsentReachedEnd] = useState(
     () => Boolean(question?.type === "consent-scroll" && saved === true),
@@ -36,44 +35,38 @@ export function QuestionPage() {
     }
   }, [isConsentScroll, question?.id, saved]);
 
-  const updateConsentScrollProgress = () => {
-    const el = scrollRef.current;
-    if (!el || !question) return;
+  const updateConsentDocumentScroll = useCallback(() => {
+    if (!question || question.type !== "consent-scroll") return;
     if (answers[question.id] === true) {
       setConsentReachedEnd(true);
       return;
     }
-    const { scrollTop, scrollHeight, clientHeight } = el;
-    const hasOverflow = scrollHeight - clientHeight > 2;
+    const root = document.scrollingElement ?? document.documentElement;
+    const scrollTop = root.scrollTop;
+    const viewport = window.visualViewport?.height ?? window.innerHeight;
+    const fullHeight = root.scrollHeight;
+    const hasOverflow = fullHeight > viewport + 2;
     if (!hasOverflow) {
       setConsentReachedEnd(true);
       return;
     }
-    const remaining = scrollHeight - scrollTop - clientHeight;
+    const remaining = fullHeight - scrollTop - viewport;
     setConsentReachedEnd(remaining <= 32);
-  };
+  }, [question, answers]);
 
-  useLayoutEffect(() => {
-    if (!question || !isConsentScroll) return;
-    const el = scrollRef.current;
-    updateConsentScrollProgress();
-    const raf = window.requestAnimationFrame(() => updateConsentScrollProgress());
-    if (!el) {
-      return () => window.cancelAnimationFrame(raf);
-    }
-    const ro = new ResizeObserver(() => updateConsentScrollProgress());
-    ro.observe(el);
+  useEffect(() => {
+    if (!isConsentScroll || !question) return;
+    const run = () => updateConsentDocumentScroll();
+    run();
+    const raf = window.requestAnimationFrame(run);
+    window.addEventListener("scroll", run, { passive: true });
+    window.addEventListener("resize", run);
     return () => {
       window.cancelAnimationFrame(raf);
-      ro.disconnect();
+      window.removeEventListener("scroll", run);
+      window.removeEventListener("resize", run);
     };
-  }, [isConsentScroll, question, question?.bullets, question?.id, answers]);
-
-  const jumpConsentToBottom = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-  };
+  }, [isConsentScroll, question, question?.id, question?.bullets, updateConsentDocumentScroll]);
 
   const canContinue = useMemo(() => {
     if (!question) return false;
@@ -169,37 +162,11 @@ export function QuestionPage() {
       )}
 
       {isConsentScroll && question.bullets && (
-        <div className={shared.consentScrollWrap}>
-          <div
-            ref={scrollRef}
-            className={shared.consentScrollArea}
-            onScroll={updateConsentScrollProgress}
-          >
-            <ul className={shared.consentBulletList}>
-              {question.bullets.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          {!consentReachedEnd && (
-            <button
-              type="button"
-              className={shared.consentJumpBtn}
-              aria-label="Scroll to the bottom"
-              onClick={jumpConsentToBottom}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M6 10l6 6 6-6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          )}
-        </div>
+        <ul className={shared.consentBulletList}>
+          {question.bullets.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       )}
 
       <QuestionInput
