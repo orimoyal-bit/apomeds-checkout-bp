@@ -156,7 +156,6 @@ export const QUESTIONS: QuestionStep[] = [
       "I understand that my medical details and prescription are valid for 12 months from the date they are issued, and I will report any health changes immediately.",
       "I accept the Terms and Conditions and Privacy Policy of Health&Go.",
     ],
-    infoText: "When you click Next, the completed questionnaire will be forwarded to the attending physician.",
     required: true,
   },
 ];
