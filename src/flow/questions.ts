@@ -143,7 +143,7 @@ export const QUESTIONS: QuestionStep[] = [
   },
   {
     id: "q10-consent",
-    type: "checkbox",
+    type: "consent-scroll",
     title: "By clicking “Next”, you confirm the following:",
     bullets: [
       "I confirm that I have answered all questions truthfully and to the best of my knowledge.",
@@ -157,7 +157,6 @@ export const QUESTIONS: QuestionStep[] = [
       "I accept the Terms and Conditions and Privacy Policy of Health&Go.",
     ],
     infoText: "When you click Next, the completed questionnaire will be forwarded to the attending physician.",
-    options: [{ id: "confirm", label: "I confirm and agree" }],
     required: true,
   },
 ];

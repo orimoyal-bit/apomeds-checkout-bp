@@ -1,3 +1,4 @@
+import { ContinueCtaButton } from "../components/ContinueCtaButton";
 import { useFlow } from "../flow/FlowContext";
 import shared from "./shared.module.css";
 
@@ -20,13 +21,10 @@ export function PaymentPage() {
         PayPal (Mock)
       </button>
 
-      <button
-        type="button"
-        className={shared.continueBtn}
+      <ContinueCtaButton
+        label={flags.mockPayment ? "Testzahlung abschließen" : "Bezahlen"}
         onClick={() => alert(flags.mockPayment ? "Mock payment OK ✓" : "Connect payment provider")}
-      >
-        {flags.mockPayment ? "Testzahlung abschließen" : "Bezahlen"}
-      </button>
+      />
 
       <div className={shared.summaryBox}>
         <strong>Session answers</strong> ({Object.keys(answers).length} saved)

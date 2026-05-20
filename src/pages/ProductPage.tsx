@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ContinueCtaButton } from "../components/ContinueCtaButton";
 import { useFlowNav } from "../flow/useFlowNav";
 import shared from "./shared.module.css";
 
@@ -38,14 +39,7 @@ export function ProductPage() {
         ))}
       </ul>
 
-      <button
-        type="button"
-        className={shared.continueBtn}
-        disabled={!selected}
-        onClick={goNext}
-      >
-        Weiter
-      </button>
+      <ContinueCtaButton label="Weiter" disabled={!selected} onClick={goNext} />
     </div>
   );
 }

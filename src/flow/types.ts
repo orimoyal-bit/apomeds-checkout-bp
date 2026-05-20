@@ -8,6 +8,7 @@ export type QuestionType =
   | "date"
   | "textarea"
   | "checkbox"
+  | "consent-scroll"
   | "cards"
   | "info";
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ContinueCtaButton } from "../components/ContinueCtaButton";
 import { useFlowNav } from "../flow/useFlowNav";
 import shared from "./shared.module.css";
 
@@ -44,14 +45,11 @@ export function DeliveryPage() {
         />
       </div>
 
-      <button
-        type="button"
-        className={shared.continueBtn}
+      <ContinueCtaButton
+        label="Weiter zur Zahlung"
         disabled={!valid}
         onClick={goNext}
-      >
-        Weiter zur Zahlung
-      </button>
+      />
     </div>
   );
 }

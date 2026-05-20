@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ContinueCtaButton } from "../components/ContinueCtaButton";
 import { useFlow } from "../flow/FlowContext";
 import { FLOW_STEPS } from "../flow/steps";
 import shared from "./shared.module.css";
@@ -32,9 +33,7 @@ export function DevPage() {
         onChange={(v) => setFlag("showStepDebug", v)}
       />
 
-      <button type="button" className={shared.continueBtn} onClick={resetFlow}>
-        Reset all answers
-      </button>
+      <ContinueCtaButton label="Reset all answers" showArrow={false} onClick={resetFlow} />
 
       <h2 style={{ fontSize: 16, marginTop: 24 }}>Jump to step</h2>
       <ul className={shared.optionList}>
