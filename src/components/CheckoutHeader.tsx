@@ -1,4 +1,7 @@
 import styles from "./CheckoutHeader.module.css";
+import apomedsLogo from "../assets/apomeds-logo.svg";
+import trustedShield from "../assets/trusted-shield.svg";
+import starIcon from "../assets/star.svg";
 
 /** Figma: Checkout / Header (12209:26659) */
 export type CheckoutHeaderProps = {
@@ -6,12 +9,9 @@ export type CheckoutHeaderProps = {
   className?: string;
 };
 
-const LOGO_SRC =
-  "https://www.figma.com/api/mcp/asset/01648354-5fee-40d5-9310-084856189a27";
-const TRUSTED_ICON_SRC =
-  "https://www.figma.com/api/mcp/asset/31bfe684-5c22-4566-9781-bf0440731f49";
-const STAR_SRC =
-  "https://www.figma.com/api/mcp/asset/5a6d82ce-ab82-43bc-884b-43e08321e680";
+const LOGO_SRC = apomedsLogo;
+const TRUSTED_ICON_SRC = trustedShield;
+const STAR_SRC = starIcon;
 
 export function CheckoutHeader({
   rating = "4.8",

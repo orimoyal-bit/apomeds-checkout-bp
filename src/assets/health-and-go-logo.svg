@@ -1,0 +1,6 @@
+<svg width="198" height="45" viewBox="0 0 198 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="2" width="37" height="37" rx="8" fill="#fff" stroke="#178F65" stroke-width="3"/>
+  <rect x="13" y="8" width="15" height="25" rx="3" fill="#178F65"/>
+  <rect x="8" y="13" width="25" height="15" rx="3" fill="#178F65"/>
+  <text x="48" y="30" fill="#178F65" font-family="Roboto, Arial, sans-serif" font-size="22" font-weight="700">Health&amp;go</text>
+</svg>

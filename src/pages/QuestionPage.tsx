@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { ContinueCtaButton } from "../components/ContinueCtaButton";
+import backArrow from "../assets/back-arrow.svg";
+import healthAndGoLogo from "../assets/health-and-go-logo.svg";
 import { useFlow } from "../flow/FlowContext";
 import { QUESTIONS } from "../flow/questions";
 import { useFlowNav } from "../flow/useFlowNav";
 import type { FlowAnswers } from "../flow/types";
 import shared from "./shared.module.css";
 
-const HEALTH_AND_GO_LOGO =
-  "https://www.figma.com/api/mcp/asset/4d4506bf-7218-49ba-a359-7d5084888ff0";
-const BACK_ARROW_SRC =
-  "https://www.figma.com/api/mcp/asset/de57665d-1c5b-49d2-b79c-97b808aa2e55";
+const HEALTH_AND_GO_LOGO = healthAndGoLogo;
+const BACK_ARROW_SRC = backArrow;
 
 export function QuestionPage() {
   const { questionId } = useParams<{ questionId: string }>();

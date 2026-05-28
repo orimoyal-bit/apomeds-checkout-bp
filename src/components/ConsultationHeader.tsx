@@ -1,4 +1,5 @@
 import styles from "./ConsultationHeader.module.css";
+import apomedsLogo from "../assets/apomeds-logo.svg";
 
 type ConsultationHeaderProps = {
   currentStep: number;
@@ -6,8 +7,7 @@ type ConsultationHeaderProps = {
   onBack?: () => void;
 };
 
-const LOGO_SRC =
-  "https://www.figma.com/api/mcp/asset/4487de1b-437c-423a-9c23-9ef519aa176f";
+const LOGO_SRC = apomedsLogo;
 
 export function ConsultationHeader({
   currentStep,

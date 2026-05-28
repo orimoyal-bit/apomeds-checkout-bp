@@ -1,4 +1,5 @@
 import styles from "./CheckoutHeroContent.module.css";
+import heroIllustration from "../assets/hero-illustration.svg";
 
 /** Figma: Checkout / Hero Content (12210:26671) */
 export type CheckoutHeroContentProps = {
@@ -11,8 +12,7 @@ export type CheckoutHeroContentProps = {
   className?: string;
 };
 
-const HERO_ILLUSTRATION_SRC =
-  "https://www.figma.com/api/mcp/asset/754f1f11-74e8-4718-9dbf-45b2923da7f4";
+const HERO_ILLUSTRATION_SRC = heroIllustration;
 
 export function CheckoutHeroContent({
   title = "You're In Good Hands",
